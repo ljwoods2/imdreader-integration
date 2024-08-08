@@ -14,9 +14,12 @@ From the compute node, create env with name "imdreader-test":
 mkdir -p workspace
 cd workspace
 git clone https://github.com/Becksteinlab/imdreader.git
+git checkout develop
 cd imdreader
 module load mamba/latest
 mamba env create --file devtools/conda-envs/test_env.yaml
+source activate imdreader-test
+pip install -e .
 ```
 
 Run the script
@@ -25,6 +28,7 @@ Clone repo and run script:
 ```bash
 cd ~/workspace
 git clone https://github.com/ljwoods2/imdreader-integration.git
-cd slurm_scripts/gmx_imdreader
+cd imdreader-integration/slurm_scripts/gmx_imdreader
+sbatch imd.sh
 ```
 
