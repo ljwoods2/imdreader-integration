@@ -1,0 +1,20 @@
+name: imdreader-integration-test
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Base depends
+  - python
+  - pip
+
+  # MDA
+  - MDAnalysis
+  - MDAnalysisTests
+
+  # Testing
+  - pytest
+  - pytest-xdist
+
+  # IMDReader
+  - pip:
+    - git+https://github.com/Becksteinlab/imdreader.git@develop
