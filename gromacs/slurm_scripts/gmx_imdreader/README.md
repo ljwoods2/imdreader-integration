@@ -14,8 +14,8 @@ From the compute node, create env with name "imdreader-test":
 mkdir -p workspace
 cd workspace
 git clone https://github.com/Becksteinlab/imdreader.git
-git checkout develop
 cd imdreader
+git checkout develop
 module load mamba/latest
 mamba env create --file devtools/conda-envs/test_env.yaml
 source activate imdreader-test
