@@ -37,12 +37,10 @@ def recvuntil(file_path, target_line, timeout):
     """
     end_time = time.time() + timeout
     with open(file_path, "r") as f:
-        # Move to the end of the file initially
-        f.seek(0, os.SEEK_END)
         while time.time() < end_time:
             time.sleep(0.1)  # Small delay to avoid busy-waiting
             # Read any new lines added to the file
-            line = f.readline()
+            line = f.readlines()
             if line:
                 logger.debug(f"Read line: {line.strip()}")
                 if target_line in line:
@@ -69,12 +67,15 @@ def run_sim_and_wait(command, match_string, input_file=None):
                 p = subprocess.Popen(
                     command,
                     stdin=input_f,
-                    stdout=f,
-                    stderr=f,
+                    stdout=subprocess.PIPE,
                     text=True,
                     bufsize=1,
                 )
-        recvuntil("sim_output.log", match_string, timeout=60)
+        for stdout_line in iter(p.stdout.readline, ""):
+            logger.debug(f"stdout: {stdout_line.strip()}")
+            if match_string in stdout_line:
+                break
+        # recvuntil("sim_output.log", match_string, timeout=60)
         return p
 
 
