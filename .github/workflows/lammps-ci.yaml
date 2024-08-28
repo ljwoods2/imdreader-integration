@@ -72,6 +72,7 @@ jobs:
       run: |
         cd lammps
         mkdir build
+        cd build
         cmake ../cmake/ -D PKG_MISC=yes
         cmake --build .
         make install
