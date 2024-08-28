@@ -37,3 +37,6 @@ def simulation():
     command = []
     match_string = "IMD: Will wait until I have a connection and IMD_GO orders."
     run_sim_and_wait(command, match_string)
+
+class TestLammpsIMDv3:
+    
